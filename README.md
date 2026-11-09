@@ -25,7 +25,9 @@ The API is at `http://localhost:8000`; interactive API docs are at `http://local
 
 ## Build and run Android
 
-Open this repository in Android Studio (JDK 17; Android SDK 34), allow Gradle sync, start an emulator, and run the `app` configuration. The default API URL in `app/build.gradle` is `http://10.0.2.2:8000/`, which routes from the standard Android emulator to the host machine. For a physical device, change `API_BASE_URL` to your computer's reachable LAN address and ensure the device can reach port 8000. The sample enables cleartext HTTP for local development; use HTTPS and disable cleartext traffic before release.
+Open this repository in Android Studio (JDK 17; Android SDK 34), allow Gradle sync, start an emulator, and run the `app` configuration. The Android namespace and application ID are `com.bekalbu.app`; Kotlin sources are in `app/src/main/java/com/bekalbu/app/`. The app label is BekalBu. The default API URL in `app/build.gradle` is `http://10.0.2.2:8000/`, which routes from the standard Android emulator to the host machine. For a physical device, change `API_BASE_URL` to your computer's reachable LAN address and ensure the device can reach port 8000. The sample enables cleartext HTTP for local development; use HTTPS and disable cleartext traffic before release.
+
+Changing the application ID means Android treats this as a separate app from an installation using the previous ID; install the BekalBu build separately. Existing user accounts and server-side meal data remain available through sign-in.
 
 Chaquopy embeds Python 3.11 and loads `app/src/main/python/nutrition.py` for offline nutrition suggestions. No Python server is needed on the phone.
 
