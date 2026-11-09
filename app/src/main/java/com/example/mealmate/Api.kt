@@ -14,7 +14,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 object TokenStore {
-    private const val PREFS = "mealmate_session"
+    private const val PREFS = "bekalbu_session"
     private const val TOKEN = "access_token"
     fun get(context: Context): String? = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString(TOKEN, null)
     fun save(context: Context, token: String) = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString(TOKEN, token).apply()
@@ -30,7 +30,7 @@ data class MealItem(
 )
 data class DailySummary(val date: String, val calories: Int, val protein: Int, val carbs: Int, val fat: Int, val meal_count: Int)
 
-interface MealMateService {
+interface BekalBuService {
     @POST("auth/register") suspend fun register(@Body body: Credentials): AuthResponse
     @POST("auth/login") suspend fun login(@Body body: Credentials): AuthResponse
     @GET("meals") suspend fun meals(): List<MealItem>
@@ -39,9 +39,9 @@ interface MealMateService {
     @GET("summary") suspend fun summary(): DailySummary
 }
 
-class MealMateApi(context: Context) {
+class BekalBuApi(context: Context) {
     private val appContext = context.applicationContext
-    val service: MealMateService = Retrofit.Builder()
+    val service: BekalBuService = Retrofit.Builder()
         .baseUrl(BuildConfig.API_BASE_URL)
         .client(OkHttpClient.Builder()
             .addInterceptor(Interceptor { chain ->
@@ -54,5 +54,9 @@ class MealMateApi(context: Context) {
             .build())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-        .create(MealMateService::class.java)
+        .create(BekalBuService::class.java)
 }
+
+// Compatibility aliases for the existing UI while it transitions to the BekalBu names.
+typealias MealMateService = BekalBuService
+typealias MealMateApi = BekalBuApi

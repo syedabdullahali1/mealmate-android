@@ -5,11 +5,13 @@ plugins {
 }
 
 android {
+    // Keep the Kotlin namespace stable so existing source packages and generated references continue to work.
     namespace 'com.example.mealmate'
     compileSdk 34
 
     defaultConfig {
-        applicationId 'com.example.mealmate'
+        // BekalBu's Android install/package identifier.
+        applicationId 'com.bekalbu.app'
         minSdk 24
         targetSdk 34
         versionCode 1
