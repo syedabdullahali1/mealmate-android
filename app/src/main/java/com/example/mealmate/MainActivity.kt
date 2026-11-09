@@ -68,7 +68,7 @@ private fun AuthScreen(api: MealMateApi, onAuthenticated: (String) -> Unit) {
     Box(Modifier.fillMaxSize().padding(24.dp), contentAlignment = Alignment.Center) {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("🥗", fontSize = 48.sp)
-            Text("MealMate", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold, color = Green)
+            Text("BekalBu", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold, color = Green)
             Text("Eat well. Feel great.", color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(8.dp))
             if (isRegister) OutlinedTextField(name, { name = it }, label = { Text("Your name") }, singleLine = true, modifier = Modifier.fillMaxWidth())
@@ -83,7 +83,7 @@ private fun AuthScreen(api: MealMateApi, onAuthenticated: (String) -> Unit) {
                     try {
                         val auth = if (isRegister) api.service.register(Credentials(email.trim(), password, name.trim())) else api.service.login(Credentials(email.trim(), password))
                         onAuthenticated(auth.access_token)
-                    } catch (e: Exception) { error = e.message ?: "Unable to connect. Check that the MealMate API is running." }
+                    } catch (e: Exception) { error = e.message ?: "Unable to connect. Check that the BekalBu API is running." }
                     finally { busy = false }
                 }
             }, enabled = !busy, modifier = Modifier.fillMaxWidth().height(52.dp)) {
@@ -91,7 +91,7 @@ private fun AuthScreen(api: MealMateApi, onAuthenticated: (String) -> Unit) {
                 else Text(if (isRegister) "Create account" else "Sign in")
             }
             TextButton(onClick = { isRegister = !isRegister; error = null }) {
-                Text(if (isRegister) "Already have an account? Sign in" else "New to MealMate? Create an account")
+                Text(if (isRegister) "Already have an account? Sign in" else "New to BekalBu? Create an account")
             }
         }
     }
@@ -121,7 +121,7 @@ private fun HomeScreen(api: MealMateApi, onLogout: () -> Unit) {
     Scaffold(
         containerColor = Cream,
         topBar = { TopAppBar(
-            title = { Text("MealMate", fontWeight = FontWeight.Bold, color = Green) },
+            title = { Text("BekalBu", fontWeight = FontWeight.Bold, color = Green) },
             actions = { TextButton(onClick = onLogout) { Text("Sign out") } },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = Cream)
         ) },
@@ -235,7 +235,7 @@ private fun DiaryScreen(meals: List<MealItem>, loading: Boolean, onAdd: (MealCre
             items(meals, key = { it.id }) { meal ->
                 Card(colors = CardDefaults.cardColors(containerColor = Color.White), shape = RoundedCornerShape(16.dp)) {
                     Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Column(Modifier.weight(1f)) { Text(meal.name, fontWeight = FontWeight.SemiBold); Text("${meal.meal_type} · ${meal.calories} kcal · P ${meal.protein}g · C ${meal.carbs}g · F ${meal.fat}g", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                        Column(Modifier.weight(1f)) { Text(meal.name, fontWeight = FontWeight.SemiBold); Text("${meal.meal_type} · ${meal.calories} kcal · P ${meal.protein}g · C ${meal.carbs}g · F ${meal.fat}g", color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall) }
                         TextButton(onClick = { onDelete(meal.id) }) { Text("Delete") }
                     }
                 }
@@ -276,7 +276,7 @@ private fun TrackerScreen(summary: DailySummary) {
         }
         Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF3E9)), shape = RoundedCornerShape(20.dp)) {
             Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("MealMate nutrition insight", fontWeight = FontWeight.Bold, color = Green)
+                Text("BekalBu nutrition insight", fontWeight = FontWeight.Bold, color = Green)
                 Text(insight)
                 Text("General wellness guidance only; not medical advice.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
