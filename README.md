@@ -1,6 +1,6 @@
-# MealMate
+# BekalBu
 
-MealMate is a Kotlin/Jetpack Compose Android meal diary and calorie tracker with a FastAPI backend, PostgreSQL database, and offline Python nutrition insights powered by Chaquopy.
+BekalBu is a Kotlin/Jetpack Compose Android meal diary and calorie tracker with a FastAPI backend, PostgreSQL database, and offline Python nutrition insights powered by Chaquopy.
 
 ## Features
 
