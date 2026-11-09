@@ -125,7 +125,7 @@ def current_user(credentials: HTTPAuthorizationCredentials | None = Depends(secu
     return user
 
 
-app = FastAPI(title="MealMate API", version="1.0.0", description="Meal diary and nutrition tracking API")
+app = FastAPI(title="BekalBu API", version="1.0.0", description="Meal diary and nutrition tracking API")
 
 
 @app.on_event("startup")
